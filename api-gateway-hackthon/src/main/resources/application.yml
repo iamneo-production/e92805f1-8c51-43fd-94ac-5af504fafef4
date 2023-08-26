@@ -23,6 +23,25 @@ spring:
           - Path=/api/v1/**
           - Method=GET,POST,PUT,DELETE
 
+        - id: APPOINTMENT-SERVICE
+          uri: lb://APPOINTMENT-SERVICE
+          predicates:
+            - Path=/api/v1/appointment/**
+            - Method=GET,POST,PUT,DELETE
+
+        - id: MEDICAL-HISTORY-SERVICE
+          uri: lb://MEDICAL-HISTORY-SERVICE
+          predicates:
+            - Path=/api/v1/medical/**
+            - Method=GET,POST,PUT,DELETE
+
+        - id: NOTIFICATION-MANAGEMENT-SERVICE
+          uri: lb://NOTIFICATION-MANAGEMENT-SERVICE
+          predicates:
+            - Path=/api/v1/schedule/**
+            - Method=GET,POST,PUT,DELETE
+
+
   main:
     web-application-type: reactive
 
