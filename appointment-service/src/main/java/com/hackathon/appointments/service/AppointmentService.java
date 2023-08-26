@@ -43,7 +43,10 @@ public class AppointmentService {
             }
             // traverse the map and set already available date in slot to booked
             for(LocalTime slot : bookedSlots){
-                if(slotWithAvailability.containsKey(slot)) slotWithAvailability.put(slot,"booked");
+                if(slotWithAvailability.containsKey(slot)) {
+                    slotWithAvailability.remove(slot);
+                    // slotWithAvailability.put(slot,"booked");
+                }
             }
             allSlots.put(date,slotWithAvailability);
 
