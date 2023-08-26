@@ -1,6 +1,8 @@
 package com.user.management.hackthon.controller;
 
 import java.util.Date;
+import java.util.Map;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,14 +30,20 @@ public class UserController {
 	
 	@PostMapping("/register")
 	public ResponseEntity<UserRegisterResponse> register(@RequestBody UserRegisterRequest request) {
-		System.out.println("calling register: "+request.toString());
-		return ResponseEntity.ok(userAuthenticationService.register(request));
-//		return ResponseEntity.ok(new AuthenticationResponse());
+		if(Objects.nonNull(request) && Objects.nonNull(request.getUserName())) {
+			return ResponseEntity.ok(userAuthenticationService.register(request));
+		} else {
+			return ResponseEntity.badRequest().build();
+		}
 	}
 	
 	@PostMapping("/login")
-	public void userLogin(@RequestBody UserLoginRequest request) {
-		
+	public ResponseEntity<Map<String, String>> userLogin(@RequestBody UserLoginRequest request) {
+		if(Objects.nonNull(request) && Objects.nonNull(request.getUserName())) {
+			return ResponseEntity.ok().body(userAuthenticationService.userLogin(request));
+		} else {
+			return ResponseEntity.badRequest().build();
+		}
 	}
 	
 }

@@ -38,7 +38,7 @@ public class User implements UserDetails {
 	@Column(name="FIRST_NAME", nullable = false, length = 25)
 	private String firstName;
 	
-	@Column(name="LAST_NAME", length = 15)
+	@Column(name="LAST_NAME", length = 25)
 	private String lastName;
 	
 	@Column(name="EMAIL", length = 50, nullable = false, unique = true)
@@ -53,8 +53,9 @@ public class User implements UserDetails {
 	@Column(name="PASSWORD_CONFIRM", length = 100, nullable = false)
 	private String passwrodConfirm;
 	
-	@Column(name="GENDER", length = 1, nullable = false)
-	private char gender;
+	/*
+	 * @Column(name="GENDER", length = 1, nullable = false) private char gender;
+	 */
 	
 	@Column(name="REG_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -62,7 +63,7 @@ public class User implements UserDetails {
 	
 	@Enumerated(EnumType.STRING)
 	private Role role;
-
+	
 	public String getId() {
 		return id;
 	}
@@ -174,12 +175,11 @@ public class User implements UserDetails {
 		this.contact = contact;
 	}
 
-	public char getGender() {
-		return gender;
-	}
+	/*
+	 * public char getGender() { return gender; }
+	 * 
+	 * public void setGender(char gender) { this.gender = gender; }
+	 */
 
-	public void setGender(char gender) {
-		this.gender = gender;
-	}
-
+	
 }

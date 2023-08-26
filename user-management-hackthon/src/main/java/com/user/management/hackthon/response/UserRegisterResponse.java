@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserRegisterResponse {
 
-	@JsonProperty("token")
-	public String token;
+//	@JsonProperty("token")
+//	public String token;
 	
 	@JsonProperty("role")
 	public String role;
@@ -13,13 +13,11 @@ public class UserRegisterResponse {
 	@JsonProperty("userId")
 	public String userName;
 	
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
+	/*
+	 * public String getToken() { return token; }
+	 * 
+	 * public void setToken(String token) { this.token = token; }
+	 */
 
 	public String getRole() {
 		return role;

@@ -11,5 +11,4 @@ public class UserManagementHackthonApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(UserManagementHackthonApplication.class, args);
 	}
-
 }
