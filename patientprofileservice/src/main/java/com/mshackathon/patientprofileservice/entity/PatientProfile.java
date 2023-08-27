@@ -17,7 +17,8 @@ import java.util.List;
 
 public class PatientProfile {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     private String patientId;
     private String patientName;
     private String patientEmail;

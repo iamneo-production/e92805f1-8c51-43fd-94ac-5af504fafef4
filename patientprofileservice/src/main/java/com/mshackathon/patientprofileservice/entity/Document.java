@@ -13,7 +13,8 @@ import lombok.ToString;
 @AllArgsConstructor
 public class Document {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     private String documentId;
     private String documentName;
     private String description;

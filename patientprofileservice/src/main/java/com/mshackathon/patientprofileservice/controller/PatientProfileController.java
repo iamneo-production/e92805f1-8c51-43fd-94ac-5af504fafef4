@@ -28,6 +28,6 @@ public class PatientProfileController {
     @PutMapping("/update/{patientId}")
     public ResponseEntity<String> editPatientProfile(@PathVariable("patientId")String patientId,@RequestBody PatientProfileDto patientProfileDto){
         this.patientService.updatePatientProfile(patientProfileDto,patientId);
-        return new ResponseEntity<>("Patient profile was saved successfully.", HttpStatus.OK);
+        return new ResponseEntity<>("Patient profile was updated successfully.", HttpStatus.OK);
     }
 }
