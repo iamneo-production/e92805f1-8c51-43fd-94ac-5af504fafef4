@@ -26,16 +26,16 @@ public class AppointmentController {
 
 
     @GetMapping("/view")
-    public ResponseEntity<Map<List<Doctor>, Map<LocalDate, Map<LocalTime,String>>>> viewSlots() {
+    public ResponseEntity<Map<List<String>, Map<LocalDate, Map<LocalTime,String>>>> viewSlots() {
         LocalDate fromDate = LocalDate.now();
         LocalDate toDate = fromDate.plusDays(1);
-        Map<List<Doctor>, Map<LocalDate, Map<LocalTime,String>>> slots = appointmentService.availableSlots(fromDate, toDate);
+        Map<List<String>, Map<LocalDate, Map<LocalTime,String>>> slots = appointmentService.availableSlots(fromDate, toDate);
         return ResponseEntity.ok(slots);
     }
 
 
     @GetMapping("/view/{mode}")
-    public ResponseEntity<Map<List<Doctor>, Map<LocalDate, Map<LocalTime,String>>>> viewSlots(@PathVariable String mode) {
+    public ResponseEntity<Map<List<String>, Map<LocalDate, Map<LocalTime,String>>>> viewSlots(@PathVariable String mode) {
         LocalDate fromDate = LocalDate.now();
         LocalDate toDate = fromDate.plusDays(1);
         switch (mode) {
@@ -46,7 +46,7 @@ public class AppointmentController {
                 toDate = fromDate.with(TemporalAdjusters.lastDayOfMonth());
                 break;
         }
-        Map<List<Doctor>, Map<LocalDate, Map<LocalTime,String>>> slots = appointmentService.availableSlots(fromDate, toDate);
+        Map<List<String>, Map<LocalDate, Map<LocalTime,String>>> slots = appointmentService.availableSlots(fromDate, toDate);
         return ResponseEntity.ok(slots);
     }
 
