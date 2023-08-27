@@ -62,4 +62,14 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<ErrorResponse> handleIllegalStateException(IllegalStateException exception){
+        ErrorResponse response = ErrorResponse.builder()
+                .message("Service currently unavailable")
+                .status(StatusMessages.SERVICE_UNAVAILABLE)
+                .httpStatus(HttpStatus.SERVICE_UNAVAILABLE)
+                .build();
+        return new ResponseEntity<>(response,HttpStatus.SERVICE_UNAVAILABLE);
+    }
+
 }

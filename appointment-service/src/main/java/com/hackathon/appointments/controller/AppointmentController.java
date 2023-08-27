@@ -1,8 +1,11 @@
 package com.hackathon.appointments.controller;
 
 import com.hackathon.appointments.entity.Appointment;
+import com.hackathon.appointments.model.Doctor;
 import com.hackathon.appointments.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.DayOfWeek;
@@ -23,19 +26,19 @@ public class AppointmentController {
 
 
     @GetMapping("/view")
-    public Map<LocalDate, Map<LocalTime,String>> viewSlots(){
+    public ResponseEntity<Map<List<Doctor>, Map<LocalDate, Map<LocalTime,String>>>> viewSlots() {
         LocalDate fromDate = LocalDate.now();
         LocalDate toDate = fromDate.plusDays(1);
-        return appointmentService.availableSlots(fromDate,toDate);
-
+        Map<List<Doctor>, Map<LocalDate, Map<LocalTime,String>>> slots = appointmentService.availableSlots(fromDate, toDate);
+        return ResponseEntity.ok(slots);
     }
 
+
     @GetMapping("/view/{mode}")
-    public Map<LocalDate, Map<LocalTime,String>> viewSlots(@PathVariable String mode){
-        System.out.println("Mode: "+mode);
+    public ResponseEntity<Map<List<Doctor>, Map<LocalDate, Map<LocalTime,String>>>> viewSlots(@PathVariable String mode) {
         LocalDate fromDate = LocalDate.now();
         LocalDate toDate = fromDate.plusDays(1);
-        switch (mode){
+        switch (mode) {
             case "w":
                 toDate = fromDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.SATURDAY));
                 break;
@@ -43,20 +46,21 @@ public class AppointmentController {
                 toDate = fromDate.with(TemporalAdjusters.lastDayOfMonth());
                 break;
         }
-        System.out.println(fromDate+" "+toDate);
-        return appointmentService.availableSlots(fromDate,toDate);
+        Map<List<Doctor>, Map<LocalDate, Map<LocalTime,String>>> slots = appointmentService.availableSlots(fromDate, toDate);
+        return ResponseEntity.ok(slots);
     }
 
     @PostMapping("/schedule")
-    public Appointment bookAppointment(@RequestBody Appointment appointment){
-        String generateAppointmentId = UUID.randomUUID().toString().substring(0,7);
+    public ResponseEntity<Appointment> bookAppointment(@RequestBody Appointment appointment) {
+        String generateAppointmentId = UUID.randomUUID().toString().substring(0, 7);
         appointment.setAppointmentId(generateAppointmentId);
-        return appointmentService.book(appointment);
-
+        Appointment bookedAppointment = appointmentService.book(appointment);
+        return ResponseEntity.status(HttpStatus.CREATED).body(bookedAppointment);
     }
 
     @GetMapping("/history/{patientId}")
-    public List<Appointment> bookingHistoryOfAPatient(@PathVariable String patientId){
-        return  appointmentService.fetchForAParticularPatient(patientId);
+    public ResponseEntity<List<Appointment>> bookingHistoryOfAPatient(@PathVariable String patientId) {
+        List<Appointment> history = appointmentService.fetchForAParticularPatient(patientId);
+        return ResponseEntity.ok(history);
     }
 }
