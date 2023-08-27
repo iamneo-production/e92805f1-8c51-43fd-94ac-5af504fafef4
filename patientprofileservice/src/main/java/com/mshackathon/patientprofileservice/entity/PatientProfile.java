@@ -18,7 +18,7 @@ import java.util.List;
 public class PatientProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long patientId;
+    private String patientId;
     private String patientName;
     private String patientEmail;
     private String patientNumber;
