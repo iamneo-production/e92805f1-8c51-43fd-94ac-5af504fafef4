@@ -9,6 +9,7 @@ public class BillingDTO {
 	private String amount;
 	private String item;
 	private String description;
+	
 	public String getPatientId() {
 		return patientId;
 	}
