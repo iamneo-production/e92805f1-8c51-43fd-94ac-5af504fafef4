@@ -1,5 +1,7 @@
 package com.user.management.hackthon.config;
 
+import java.text.MessageFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.user.management.hackthon.exception.UserNotFoundException;
 import com.user.management.hackthon.repository.UserRepository;
 
 @Configuration
@@ -21,17 +24,10 @@ public class ApplicationConfig {
 	private UserRepository userRepository;
 
 	@Bean
-	public UserDetailsService userDetailsService() {
+	public UserDetailsService userDetailsService() throws UserNotFoundException {
 		return username -> userRepository.findByUserName(username)
-				.orElseThrow(() -> new UsernameNotFoundException("User not Found!!"));
-		
-		/*
-		 * new UserDetailsService() {
-		 * 
-		 * @Override public UserDetails loadUserByUsername(String username) throws
-		 * UsernameNotFoundException { // TODO Auto-generated method stub return null; }
-		 * };
-		 */
+				.orElseThrow(
+						()-> new UsernameNotFoundException(MessageFormat.format("UserId {0} not Found or invalid credentials", username)));
 	}
 	
 	@Bean

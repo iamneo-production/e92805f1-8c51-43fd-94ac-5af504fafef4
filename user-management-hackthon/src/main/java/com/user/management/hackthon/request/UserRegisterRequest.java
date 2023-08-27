@@ -28,6 +28,9 @@ public class UserRegisterRequest {
 	@JsonProperty("Role")
 	private String roleType;
 	
+	@JsonProperty("Specialist")
+	private String specialization;
+	
 	@JsonProperty("Gender")
 	private String gender;
 
@@ -101,6 +104,14 @@ public class UserRegisterRequest {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public String getSpecialization() {
+		return specialization;
+	}
+
+	public void setSpecialization(String specialization) {
+		this.specialization = specialization;
 	}
 	
 }
