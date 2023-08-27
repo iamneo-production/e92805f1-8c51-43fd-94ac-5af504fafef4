@@ -1,0 +1,89 @@
+User Register:
+URL: http://localhost:7002/api/v1/management/register
+Request Method: POST
+Database Table: user_tbl
+Json request:
+{
+    "User Id":"sreeram",
+    "First Name":"Sreeram",
+    "Last Name":"Kurva",
+    "Email Id":"sreeram.kurva99@gmail.com",
+    "Phone": 9111111119,
+    "Password":"test123",
+    "Confirm Password":"test123",
+    "Role": "Doctor",
+    "Gender":"male",
+    "Specialist": "General Physician"
+}
+
+Json Respone:
+{
+    "role": "PATIENT",
+    "userId": "sreeram"
+}
+
+Notes:
+- user id should be unique
+- email id should be unique
+- phone number should be unique
+- Specialist must be provided when role is Doctor.
+
+
+User Login:
+URL: http://localhost:7002/api/v1/management/login
+Request Method: POST
+Json request:
+{
+    "UserId":"sreeram",
+    "Password":"test123"
+}
+
+Json Respone:
+{
+    "role": "DOCTOR",
+    "patientId": "4765d2d48a624bb99d4586b49509d3ab",
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aWNreSIsImlhdCI6MTY5MzEwOTM1MiwiZXhwIjoxNjkzMTEwNzkyfQ.ifmxyRyvDu94-xRj4I3KHBcCMYEKCU5R7s9ZjeH0-gQ"
+}
+
+
+Get All Doctors:
+Database Table: : doctor_tbl
+URL: http://localhost:7002/api/v1/actor/doctors
+Request Method: GET
+Json Request: NA
+Authorization (Bearer Token): eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aWNreSIsImlhdCI6MTY5MzEwOTM1MiwiZXhwIjoxNjkzMTEwNzkyfQ.ifmxyRyvDu94-xRj4I3KHBcCMYEKCU5R7s9ZjeH0-gQ
+
+Json Respone:
+{
+    "doctors": [
+        {
+            "Doctor Id": "9a985605574b4109950d3404e84f45f0",
+            "Doctor Name": "nidhi",
+            "Specialist": "Gynecologist",
+            "Gender": "female"
+        },
+        {
+            "Doctor Id": "c6d495eef0ac434b997596bc4486c298",
+            "Doctor Name": "sreeram",
+            "Specialist": "General Physician",
+            "Gender": "male"
+        }
+    ]
+}
+
+get patient By Id:
+URL http://localhost:7002/api/v1/actor/patient/{paitnetId}
+EG URL http://localhost:7002/api/v1/actor/patient/4765d2d48a624bb99d4586b49509d3ab
+Database Table: : patient_tbl
+Request Method: GET
+
+Json Respone:
+{
+    "patient": {
+        "Patient Id": "4765d2d48a624bb99d4586b49509d3ab",
+        "Patient Name": "vicky",
+        "Gender": "Male",
+        "Email Id": "Vicky@gmail.com",
+        "Phone": "9000110009"
+    }
+}
