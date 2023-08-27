@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>api-gateway-hackthon</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.1</version>
 	<name>api-gateway-hackthon</name>
 	<description>cloud API geateway project for Spring Boot</description>
 	<properties>
