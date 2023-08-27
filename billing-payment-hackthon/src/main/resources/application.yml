@@ -1,0 +1,32 @@
+server:
+  port: 7003
+
+spring:
+    cloud:
+      discovery:
+        enabled: true
+    application:
+      name: BILLING-PAYMENT
+    datasource:
+        url: jdbc:mysql://127.0.0.1:3306/billing_payment_hackthon?createDatabaseIfNotExist=true&useSSL=true 
+        driverClassName: com.mysql.jdbc.Driver
+        username: root
+        password: examly
+    jpa:
+        database-platform: org.hibernate.dialect.MySQLDialect
+        hibernate:
+            ddl-auto: update
+                
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+
+user:
+  management:
+    feign:
+      url: http://127.0.0.1:7001/api/v1/actor
