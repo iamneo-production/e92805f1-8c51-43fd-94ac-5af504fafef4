@@ -11,4 +11,9 @@ import com.user.management.hackthon.entity.User;
 public interface UserRepository extends JpaRepository<User, String>{
 
 	Optional<User> findByUserName(String userName);
+	
+	Optional<User> findByEmail(String email);
+	
+	Optional<User> findByContact(String contact);
+	
 }

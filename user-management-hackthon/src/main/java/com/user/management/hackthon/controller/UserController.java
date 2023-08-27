@@ -23,8 +23,8 @@ public class UserController {
 	@Autowired
 	private UserAuthenticationService userAuthenticationService;
 	
-	@RequestMapping("/display")
-	public String display() {
+	@RequestMapping("/health")
+	public String health() {
 		return "User management is UP "+new Date();
 	}
 	
