@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>service-registry-hackthon</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<name>service-registry-hackthon</name>
 	<description>Service Regitry project for Spring Boot</description>
 	<properties>
