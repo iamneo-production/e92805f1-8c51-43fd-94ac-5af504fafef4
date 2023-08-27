@@ -14,7 +14,7 @@ import lombok.ToString;
 public class Document {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long documentId;
+    private String documentId;
     private String documentName;
     private String description;
     @ManyToOne

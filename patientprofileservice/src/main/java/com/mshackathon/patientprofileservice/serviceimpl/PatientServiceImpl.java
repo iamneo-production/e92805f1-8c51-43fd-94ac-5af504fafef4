@@ -38,16 +38,16 @@ public class PatientServiceImpl implements PatientService {
         log.info("Patient profile was saved successfully");
     }
     @Override
-    public PatientProfileDto viewPatientProfile(Long patientId) {
-        PatientProfile patientProfile =  this.patientProfileRepository.findById(patientId).orElseThrow(()-> new PatientNotFoundException("No patient found with given id"));
+    public PatientProfileDto viewPatientProfile(String patientId) {
+        PatientProfile patientProfile =  this.patientProfileRepository.findById(Long.valueOf(patientId)).orElseThrow(()-> new PatientNotFoundException("No patient found with given id"));
         PatientProfileDto patientProfileDto = this.modelMapper.map(patientProfile,PatientProfileDto.class);
         return patientProfileDto;
     }
     @Override
-    public void updatePatientProfile(PatientProfileDto patientProfileDto,Long patientId) {
+public void updatePatientProfile(PatientProfileDto patientProfileDto,String patientId) {
         PatientProfile patientProfile = this.modelMapper.map(patientProfileDto,PatientProfile.class);
         log.info("Patient profile details = {}",patientProfile);
-        PatientProfile localPatientProfile = this.patientProfileRepository.findById(patientId).orElseThrow(()->new PatientNotFoundException("No patient found with given id"));
+        PatientProfile localPatientProfile = this.patientProfileRepository.findById(Long.valueOf(patientId)).orElseThrow(()->new PatientNotFoundException("No patient found with given id"));
         localPatientProfile.setPatientName(patientProfile.getPatientName());
         localPatientProfile.setPatientEmail(patientProfile.getPatientEmail());
         localPatientProfile.setPatientAge(patientProfile.getPatientAge());

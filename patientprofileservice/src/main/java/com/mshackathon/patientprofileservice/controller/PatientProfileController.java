@@ -21,12 +21,12 @@ public class PatientProfileController {
     }
 
     @GetMapping("/view/{patientId}")
-    public ResponseEntity<PatientProfileDto> viewPatientProfile(@PathVariable("patientId") Long patientId){
+    public ResponseEntity<PatientProfileDto> viewPatientProfile(@PathVariable("patientId") String patientId){
         return new ResponseEntity<>(patientService.viewPatientProfile(patientId),HttpStatus.OK);
     }
 
     @PutMapping("/update/{patientId}")
-    public ResponseEntity<String> editPatientProfile(@PathVariable("patientId")Long patientId,@RequestBody PatientProfileDto patientProfileDto){
+    public ResponseEntity<String> editPatientProfile(@PathVariable("patientId")String patientId,@RequestBody PatientProfileDto patientProfileDto){
         this.patientService.updatePatientProfile(patientProfileDto,patientId);
         return new ResponseEntity<>("Patient profile was saved successfully.", HttpStatus.OK);
     }
