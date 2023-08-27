@@ -21,12 +21,12 @@ public class VideoConsultationService {
     @Autowired
     private PrescriptionRepository prescriptionRepository;
 
-    public Consultation getVideoConsultation(Long patientId) {
+    public Consultation getVideoConsultation(String patientId) {
         return consultationRepository.findByPatientId(patientId)
                 .orElseThrow(() -> new ResourceNotFoundException("Video consultation not found for patient: " + patientId));
     }
 
-    public Prescription createPrescription(Long patientId, Long doctorId, PrescriptionRequest prescriptionRequest) {
+    public Prescription createPrescription(String patientId, String doctorId, PrescriptionRequest prescriptionRequest) {
         Consultation consultation = consultationRepository.findByPatientId(patientId)
                 .orElseThrow(() -> new ResourceNotFoundException("Video consultation not found for patient: " + patientId));
 
@@ -40,7 +40,7 @@ public class VideoConsultationService {
         return prescription;
     }
 
-    public List<Prescription> getPrescriptions(Long patientId) {
+    public List<Prescription> getPrescriptions(String patientId) {
         return prescriptionRepository.findByPatientId(patientId);
     }
 }

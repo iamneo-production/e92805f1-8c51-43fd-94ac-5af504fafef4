@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface VideoConsultationRepository extends JpaRepository<Consultation, Long> {
-    Optional<Consultation> findByPatientId(Long patientId);
+public interface VideoConsultationRepository extends JpaRepository<Consultation, String> {
+    Optional<Consultation> findByPatientId(String patientId);
 }

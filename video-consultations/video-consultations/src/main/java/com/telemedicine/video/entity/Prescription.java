@@ -13,11 +13,9 @@ import java.time.LocalDate;
 @Entity
 public class Prescription {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private Long patientId;
-    private Long doctorId;
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String patientId;
+    private String doctorId;
     private LocalDate date;
     private String medicines;
 }
