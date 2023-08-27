@@ -21,3 +21,4 @@ public interface FeignUserManagementProxy {
 			@RequestHeader(BillingPaymentContants.AUTHORIZATION) String bearerToken);
 
 }
+
