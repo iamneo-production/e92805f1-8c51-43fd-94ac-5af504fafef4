@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Document {
-    private Long documentId;
+    private String documentId;
     private String documentName;
     private String description;
 

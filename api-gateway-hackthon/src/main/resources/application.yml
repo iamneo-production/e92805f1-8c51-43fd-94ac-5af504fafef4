@@ -14,7 +14,7 @@ spring:
         - id: USER-MANAGEMENT
           uri: lb://USER-MANAGEMENT
           predicates:
-            - Path=/api/v1/management/**
+            - Path=/api/v1/management/**, /api/v1/actor/**
             - Method=GET,POST,PUT,DELETE
         
         - id: BILLING-PAYMENT

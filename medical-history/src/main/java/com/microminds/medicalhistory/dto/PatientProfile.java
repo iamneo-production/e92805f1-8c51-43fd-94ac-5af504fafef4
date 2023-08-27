@@ -13,7 +13,7 @@ import java.util.List;
 @Builder
 public class PatientProfile {
 
-        private Long patientId;
+        private String patientId;
         private String patientName;
         private String patientEmail;
         private String patientNumber;
