@@ -40,6 +40,12 @@ spring:
           predicates:
             - Path=/api/v1/schedule/**
             - Method=GET,POST,PUT,DELETE
+        
+        - id: PATIENT-PROFILE-SERVICE
+          uri: lb://NOTIFICATION-MANAGEMENT-SERVICE
+          predicates:
+            - Path=/api/v1/profile/**
+            - Method=GET,POST,PUT,DELETE
 
 
   main:
