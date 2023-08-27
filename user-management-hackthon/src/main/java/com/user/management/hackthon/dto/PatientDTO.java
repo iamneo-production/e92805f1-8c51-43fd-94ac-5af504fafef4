@@ -1,22 +1,29 @@
 package com.user.management.hackthon.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 public class PatientDTO {
 
 	@JsonProperty("Patient Id")
+	@JsonInclude(Include.NON_NULL)
 	private String patientId;
 	
 	@JsonProperty("Patient Name")
+	@JsonInclude(Include.NON_NULL)
 	private String patientName;
 	
 	@JsonProperty("Gender")
+	@JsonInclude(Include.NON_NULL)
 	private String gender;
 	
 	@JsonProperty("Email Id")
+	@JsonInclude(Include.NON_NULL)
 	private String mailId;
 	
 	@JsonProperty("Phone")
+	@JsonInclude(Include.NON_NULL)
 	private String contact;
 	
 	public String getPatientId() {

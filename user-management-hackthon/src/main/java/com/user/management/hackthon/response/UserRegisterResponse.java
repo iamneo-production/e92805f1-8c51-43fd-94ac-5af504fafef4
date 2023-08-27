@@ -1,24 +1,19 @@
 package com.user.management.hackthon.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 public class UserRegisterResponse {
 
-//	@JsonProperty("token")
-//	public String token;
-	
 	@JsonProperty("role")
+	@JsonInclude(Include.NON_NULL)
 	public String role;
 	
 	@JsonProperty("userId")
+	@JsonInclude(Include.NON_NULL)
 	public String userName;
 	
-	/*
-	 * public String getToken() { return token; }
-	 * 
-	 * public void setToken(String token) { this.token = token; }
-	 */
-
 	public String getRole() {
 		return role;
 	}
