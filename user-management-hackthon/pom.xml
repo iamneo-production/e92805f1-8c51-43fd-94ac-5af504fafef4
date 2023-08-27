@@ -14,7 +14,7 @@
 	<name>user-management-hackthon</name>
 	<description>User Management and Payment project for Spring Boot</description>
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>17</java.version>
 		<spring-cloud.version>2022.0.4</spring-cloud.version>
 	</properties>
 	<dependencies>
