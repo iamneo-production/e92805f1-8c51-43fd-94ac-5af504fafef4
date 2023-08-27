@@ -41,7 +41,7 @@ public class AppointmentService {
     private String urlOfUserManagementService;
 
     public Map<List<String>, Map<LocalDate, Map<LocalTime, String>>> availableSlots(LocalDate fromDate,
-            LocalDate toDate) {
+            LocalDate toDate,String token) {
         Map<List<String>, Map<LocalDate, Map<LocalTime, String>>> slotsWithDoctors = new HashMap<>();
         Map<LocalDate, Map<LocalTime, String>> allSlots = new TreeMap<>();
 
@@ -68,7 +68,7 @@ public class AppointmentService {
             allSlots.put(date, slotWithAvailability);
 
         }
-        List<String> doctors = makeACallToUserManagementService();
+        List<String> doctors = makeACallToUserManagementService(token);
         slotsWithDoctors.put(doctors, allSlots);
         return slotsWithDoctors;
 
@@ -109,11 +109,11 @@ public class AppointmentService {
         log.info("Notification Send to email id: " + appointment.getPatientEmail());
     }
 
-    private List<String> makeACallToUserManagementService() {
+    private List<String> makeACallToUserManagementService(String token) {
         // String uri = urlOfUserManagementService+"/api/v1/actor/doctors";
         List<String> doctorList = new ArrayList<>();
 
-        List<Doctor> fetchedDoctorList = userManagementRepository.getDoctors().getDoctors();
+        List<Doctor> fetchedDoctorList = userManagementRepository.getDoctors("Bearer "+token).getDoctors();
         if (fetchedDoctorList.isEmpty()) {
             doctorList.add("No Doctors available");
         } else {
