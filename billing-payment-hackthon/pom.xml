@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>billing-payment-hackthon</groupId>
 	<artifactId>billing-payment-hackthon</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.1</version>
 	<name>billing-payment-hackthon</name>
 	<description>Billing and Payment project for Spring Boot</description>
 	<properties>
