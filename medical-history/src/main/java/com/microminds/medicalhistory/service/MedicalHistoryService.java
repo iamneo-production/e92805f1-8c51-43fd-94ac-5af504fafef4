@@ -29,10 +29,10 @@ public class MedicalHistoryService {
     private PatientProfileRepo patientProfileRepo;
 
     public ResponseEntity<MedicalRecord> getMedicalRecords(String patientId){
-        List<Appointment> appointments = getAppointmentHistory(patientId);
-        List<Prescription> prescriptions = getPrescriptions(patientId);
+        // List<Appointment> appointments = getAppointmentHistory(patientId);
+        // List<Prescription> prescriptions = getPrescriptions(patientId);
         PatientProfile patientProfile = getpatientProfile(patientId);
-        return new ResponseEntity<>(MedicalRecord.builder().appointmentList(appointments).prescriptions(prescriptions).history(patientProfile.getHistory()).documents(patientProfile.getDocuments()).build(), HttpStatus.OK);
+        return new ResponseEntity<>(MedicalRecord.builder().history(patientProfile.getHistory()).documents(patientProfile.getDocuments()).build(), HttpStatus.OK);
     }
 
     @CircuitBreaker(name="videoConsultationServiceCircuitBreaker", fallbackMethod = "videoConsultationBreakHandler")
