@@ -16,7 +16,12 @@ spring:
         database-platform: org.hibernate.dialect.MySQLDialect
         hibernate:
             ddl-auto: update
-                
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
 eureka:
   client:
     register-with-eureka: true
@@ -26,7 +31,5 @@ eureka:
   instance:
     hostname: localhost
 
-user:
-  management:
-    feign:
-      url: http://127.0.0.1:7001/api/v1/actor
+user-management-service:
+  base-url: http://USER-MANAGEMENT
