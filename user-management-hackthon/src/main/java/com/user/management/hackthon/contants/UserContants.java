@@ -12,6 +12,7 @@ public class UserContants {
 	public static final String EMAIL_ID_EXISTS = "Email Id alreay register.";
 	public static final String PHONE_NUMBER_EXISTS = "Phone number alreay register.";
 	public static final String USER_ID_EXISTS = "User Id alreay register.";
+	public static final String DOCTOR_SPLT = "Plese provie Doctor Specialist.";
 	
 	public static final String HYPHEN = "-";
 	public static final String EMPTY = "";

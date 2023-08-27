@@ -55,6 +55,7 @@ public class UserAuthenticationService {
 
 	public UserRegisterResponse register(UserRegisterRequest request) throws UserNotFoundException {
 		UserRegisterResponse response = new UserRegisterResponse();
+
 		var user = mapDtoToEntity(request);
 
 		validateUserAlreadyRegister(user);
