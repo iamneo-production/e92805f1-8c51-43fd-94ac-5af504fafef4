@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,9 +40,9 @@ public class PaymentController {
 		return ResponseEntity.ok().body(paymentDTO);
 	}
 	
-	@GetMapping(value = "/{paymentId}",
+	@GetMapping(value = "/track/{paymentId}",
             produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<PaymentResponse> trackPaymentByPaymentId(@RequestBody String paymentId) {
+	public ResponseEntity<PaymentResponse> trackPaymentByPaymentId(@PathVariable("paymentId") String paymentId) {
 		PaymentResponse response = new PaymentResponse();
 		PaymentDTO paymentDTO = paymentService.trackPayment(paymentId);
 		response.setPayment(paymentDTO);

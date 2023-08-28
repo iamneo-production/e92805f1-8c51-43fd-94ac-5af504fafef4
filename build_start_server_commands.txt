@@ -1,0 +1,11 @@
+use the below command to build the service:
+project> mvn clean package
+
+run the below commnd to start the service:
+project> java -jar /home/coder/project/workspace/service-registry-hackthon/target/service-registry-hackthon-1.0.3.jar
+
+project> java -jar /home/coder/project/workspace/api-gateway-hackthon/target/api-gateway-hackthon-1.0.3.jar
+
+project> java -jar /home/coder/project/workspace/user-management-hackthon/target/user-management-hackthon-1.0.3.jar
+
+project> java -jar /home/coder/project/workspace/billing-payment-hackthon/target/billing-payment-hackthon-1.0.3.jar
