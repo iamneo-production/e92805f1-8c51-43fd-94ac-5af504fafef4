@@ -16,25 +16,42 @@ import java.util.List;
 public class VideoConsultationController {
 
     @Autowired
-    private VideoConsultationService consultationService;
+    private VideoConsultationService videoConsultationService;
+
+    public VideoConsultationController(VideoConsultationService consultationService) {
+        this.videoConsultationService = consultationService;
+    }
 
     @GetMapping("/video/{patientId}")
-    public ResponseEntity<Consultation> getVideoConsultation(@PathVariable String patientId) {
-        Consultation consultation = consultationService.getVideoConsultation(patientId);
-        return ResponseEntity.ok(consultation);
+    public ResponseEntity<String> getVideoConsultation(@PathVariable String patientId) {
+        // Fetch consultation data using the ConsultationService
+        Consultation consultationDto = videoConsultationService.getConsultationData(patientId);
+
+        // Create a response or process the fetched data as needed
+        String response = "Patient: " + consultationDto.getPatientName()
+                + ", Doctor: " + consultationDto.getDoctorId()
+                + ", Date: " + consultationDto.getDate()
+                + ", Time: " + consultationDto.getTime();
+
+        return ResponseEntity.ok(response);
     }
+//    @GetMapping("/video/{patientId}")
+//    public ResponseEntity<Consultation> getVideoConsultation(@PathVariable String patientId) {
+//        Consultation consultation = videoConsultationService.getVideoConsultation(patientId);
+//        return ResponseEntity.ok(consultation);
+//    }
 
     @PostMapping("/prescription/{patientId}/{doctorId}")
     public ResponseEntity<Prescription> createPrescription(
             @PathVariable String patientId, @PathVariable String doctorId,
             @RequestBody PrescriptionRequest prescriptionRequest) {
-        Prescription prescription = consultationService.createPrescription(patientId, doctorId, prescriptionRequest);
+        Prescription prescription = videoConsultationService.createPrescription(patientId, doctorId, prescriptionRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(prescription);
     }
 
     @GetMapping("/prescription/{patientId}")
     public ResponseEntity<List<Prescription>> getPrescriptions(@PathVariable String patientId) {
-        List<Prescription> prescriptions = consultationService.getPrescriptions(patientId);
+        List<Prescription> prescriptions = videoConsultationService.getPrescriptions(patientId);
         return ResponseEntity.ok(prescriptions);
     }
 }
