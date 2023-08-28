@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>user-management-hackthon</groupId>
 	<artifactId>user-management-hackthon</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.3</version>
 	<name>user-management-hackthon</name>
 	<description>User Management and Payment project for Spring Boot</description>
 	<properties>

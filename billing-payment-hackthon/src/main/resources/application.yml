@@ -16,7 +16,20 @@ spring:
         database-platform: org.hibernate.dialect.MySQLDialect
         hibernate:
             ddl-auto: update
-                
+        show-sql: true
+
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
 eureka:
   client:
     register-with-eureka: true
@@ -26,7 +39,19 @@ eureka:
   instance:
     hostname: localhost
 
-user:
-  management:
-    feign:
-      url: http://127.0.0.1:7001/api/v1/actor
+resilience4j:
+  circuitbreaker:
+    instances:
+      userMangementServiceCircuitBreaker:
+        registerHealthIndicator: true
+        eventConsumerBufferSize: 12
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowSize: 10
+        slidingWindowType: COUNT_BASED
+
+user-management-service:
+  base-url: http://USER-MANAGEMENT

@@ -1,0 +1,66 @@
+Billing and PaymentService:
+Health Check:
+URL: https://ide-cacccfefeffbccffdddadfcfcaeabdfaecdedaeee.premiumproject.examly.io/proxy/7001/api/v1/payment/health
+Request Method: GET
+
+Payment using Patient Id:
+URL: https://ide-cacccfefeffbccffdddadfcfcaeabdfaecdedaeee.premiumproject.examly.io/proxy/7001/api/v1/payment/patient
+Request Method: POST
+Database Table: PAYMENT_TBL
+Json request:
+{
+    "Patient Id":"25be3225de334c64a41c4907516fa124",
+    "Item":"Sugar Test",
+    "Amount": "150.75",
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJWaW5heSIsImlhdCI6MTY5MzE5MzA4NSwiZXhwIjoxNjkzMTk0NTI1fQ.GXIA6cVQoVtxfVKxTEHAyJRZScfnwEI2-_0hqQIV8ww"
+}
+
+
+
+Json Respone:
+{
+  "Payment Id": "084ec2eb-c357-41ec-9e7b-d556d9a16098",
+  "Payment Date": "2023-08-27 22:49:24",
+  "Item": "General Check up",
+  "Payment Amount": "1050.75",
+  "Payment Status": "PROCESSING"
+}
+
+Payment Tracking using paymentId:
+URL: https://ide-cacccfefeffbccffdddadfcfcaeabdfaecdedaeee.premiumproject.examly.io/proxy/7001/api/v1/payment/track/a89ebf1f-924c-4cdc-acea-b748b1557884
+Request Method: GET
+Database Table: PAYMENT_TBL
+
+Json Respone:
+
+{
+    "payment": {
+        "Payment Id": "a89ebf1f-924c-4cdc-acea-b748b1557884",
+        "Payment Date": "2023-08-28 03:33:03",
+        "Payment Amount": "7999.99",
+        "Payment Status": "SUCCESS"
+    }
+}
+
+
+Generate All invoices:
+URL: https://ide-cacccfefeffbccffdddadfcfcaeabdfaecdedaeee.premiumproject.examly.io/proxy/7001/api/v1/billing/invoices
+Request Method: GET
+Database Table: INVOICE_TBL
+
+Response: invoice file in PDF format. attached it for reference.
+
+Generate invoice for patient using PayemntId (can be add multiple):
+https://ide-cacccfefeffbccffdddadfcfcaeabdfaecdedaeee.premiumproject.examly.io/proxy/7001/api/v1/billing/patients/invoice
+Request Method: POST
+Database Table: INVOICE_TBL
+Json Request:
+{
+    "Patient Ids": ["8105aa1b40b94371b8fde956d20b851a"]
+
+}
+Response: invoice file in PDF format. attached it for reference.
+
+Notes:
+- Whiile making payment by patientId, service calls external user-management to valiate patientId, payemnt done if valid patientId else no payment done.
+- While making payment internally persist invoice table with neccessary information and ready to geneerate the invoices

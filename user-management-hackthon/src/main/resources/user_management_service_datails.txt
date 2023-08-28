@@ -1,5 +1,5 @@
 User Register:
-URL: http://localhost:7002/api/v1/management/register
+URL: https://ide-cacccfefeffbccffdddadfcfcaeabdfaecdedaeee.premiumproject.examly.io/proxy/7001/api/v1/management/register
 Request Method: POST
 Database Table: user_tbl
 Json request:
@@ -30,7 +30,7 @@ Notes:
 
 
 User Login:
-URL: http://localhost:7002/api/v1/management/login
+URL: https://ide-cacccfefeffbccffdddadfcfcaeabdfaecdedaeee.premiumproject.examly.io/proxy/7001/api/v1/management/login
 Request Method: POST
 Json request:
 {
@@ -48,7 +48,7 @@ Json Respone:
 
 Get All Doctors:
 Database Table: : doctor_tbl
-URL: http://localhost:7002/api/v1/actor/doctors
+URL: https://ide-cacccfefeffbccffdddadfcfcaeabdfaecdedaeee.premiumproject.examly.io/proxy/7001/api/v1/actor/doctors
 Request Method: GET
 Json Request: NA
 Authorization (Bearer Token): eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aWNreSIsImlhdCI6MTY5MzEwOTM1MiwiZXhwIjoxNjkzMTEwNzkyfQ.ifmxyRyvDu94-xRj4I3KHBcCMYEKCU5R7s9ZjeH0-gQ
@@ -72,8 +72,8 @@ Json Respone:
 }
 
 get patient By Id:
-URL http://localhost:7002/api/v1/actor/patient/{paitnetId}
-EG URL http://localhost:7002/api/v1/actor/patient/4765d2d48a624bb99d4586b49509d3ab
+URL https://ide-cacccfefeffbccffdddadfcfcaeabdfaecdedaeee.premiumproject.examly.io/proxy/7001/api/v1/actor/patient/{paitnetId}
+EG URL https://ide-cacccfefeffbccffdddadfcfcaeabdfaecdedaeee.premiumproject.examly.io/proxy/7001/api/v1/actor/patient/4765d2d48a624bb99d4586b49509d3ab
 Database Table: : patient_tbl
 Request Method: GET
 
