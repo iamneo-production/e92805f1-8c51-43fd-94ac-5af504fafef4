@@ -17,10 +17,16 @@ spring:
         hibernate:
             ddl-auto: update
 management:
+  health:
+    circuitbreakers:
+      enabled: true
   endpoints:
     web:
       exposure:
         include: "*"
+  endpoint:
+    health:
+      show-details: always
 
 eureka:
   client:
@@ -30,6 +36,20 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
   instance:
     hostname: localhost
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      userMangementServiceCircuitBreaker:
+        registerHealthIndicator: true
+        eventConsumerBufferSize: 12
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowSize: 10
+        slidingWindowType: COUNT_BASED
 
 user-management-service:
   base-url: http://USER-MANAGEMENT

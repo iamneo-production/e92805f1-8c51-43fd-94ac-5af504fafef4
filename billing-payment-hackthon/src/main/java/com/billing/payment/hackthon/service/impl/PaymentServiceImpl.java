@@ -22,6 +22,8 @@ import com.billing.payment.hackthon.response.PatientResponse;
 import com.billing.payment.hackthon.service.PaymentService;
 import com.billing.payment.hackthon.util.BillingPymentUtil;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+
 @Service
 public class PaymentServiceImpl implements PaymentService {
 
@@ -39,22 +41,23 @@ public class PaymentServiceImpl implements PaymentService {
 	@Override
 	public PaymentDTO paymentByPatintId(PaymentPatientDTO patientDTO) {
 
-		ResponseEntity<PatientResponse> patientResponse = userManagementProxy.getPatientById(patientDTO.getPatientId(),
-				BillingPaymentContants.BEARER + patientDTO.getToken());
+		ResponseEntity<PatientResponse> patientResponse = getPatientsFromUserManageentById(patientDTO.getPatientId(),
+				patientDTO.getToken());
 
-		System.out.println(patientResponse);
 		if (Objects.nonNull(patientResponse) && Objects.nonNull(patientResponse.getBody())) {
 			PatientDTO userPatientDTO = patientResponse.getBody().getPatient();
-			LOG.debug("Received response from external client patientId={0}, patientName={1}",
-					userPatientDTO.getPatientId(), userPatientDTO.getPatientName());
-			var persistPayment = mapDTOToEntity(patientDTO, userPatientDTO.getPatientName());
-			Payment savedPayment = paymentRepository.save(persistPayment);
-			var invoice = mapInvoiceEntity(savedPayment);
-			Invoice savedInvoice = invoiceRepository.save(invoice);
-			LOG.debug("Invoice is created invoiceId={0}, patientId={1}", savedInvoice.getId(),
-					savedInvoice.getPatientId());
-			var payment = mapEntityToDTO(savedPayment);
-			return payment;
+			if (Objects.nonNull(userPatientDTO) && Objects.nonNull(userPatientDTO.getPatientId())) {
+				LOG.debug("Received response from external client patientId={0}, patientName={1}",
+						userPatientDTO.getPatientId(), userPatientDTO.getPatientName());
+				var persistPayment = mapDTOToEntity(patientDTO, userPatientDTO.getPatientName());
+				Payment savedPayment = paymentRepository.save(persistPayment);
+				var invoice = mapInvoiceEntity(savedPayment);
+				Invoice savedInvoice = invoiceRepository.save(invoice);
+				LOG.debug("Invoice is created invoiceId={0}, patientId={1}", savedInvoice.getId(),
+						savedInvoice.getPatientId());
+				var payment = mapEntityToDTO(savedPayment);
+				return payment;
+			}
 		}
 
 		return new PaymentDTO();
@@ -74,6 +77,17 @@ public class PaymentServiceImpl implements PaymentService {
 		}
 
 		return new PaymentDTO();
+	}
+
+	@CircuitBreaker(name = "userMangementServiceCircuitBreaker", fallbackMethod = "patientByPatientIdFromUserMnagement")
+	private ResponseEntity<PatientResponse> getPatientsFromUserManageentById(String patientId, String token) {
+		ResponseEntity<PatientResponse> patientResponse = userManagementProxy.getPatientById(patientId,
+				BillingPaymentContants.BEARER + token);
+		return patientResponse;
+	}
+
+	public ResponseEntity<PatientResponse> patientByPatientIdFromUserMnagement(String patientId, Exception ex) {
+		return ResponseEntity.ok().body(new PatientResponse());
 	}
 
 	private Invoice mapInvoiceEntity(Payment savedPayment) {
