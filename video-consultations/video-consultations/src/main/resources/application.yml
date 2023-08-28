@@ -28,4 +28,4 @@ eureka:
 
 appointment:
     feign:
-      url: http://APPOINTMENT-SERVICE/api/v1/appointment
+      url: http://localhost:9191/api/v1/appointment
