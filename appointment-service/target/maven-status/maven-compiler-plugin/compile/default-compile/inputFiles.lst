@@ -1,0 +1,11 @@
+/home/coder/project/workspace/appointment-service/src/main/java/com/hackathon/appointments/exception/DuplicateEntryException.java
+/home/coder/project/workspace/appointment-service/src/main/java/com/hackathon/appointments/AppointmentServiceApplication.java
+/home/coder/project/workspace/appointment-service/src/main/java/com/hackathon/appointments/controller/AppointmentController.java
+/home/coder/project/workspace/appointment-service/src/main/java/com/hackathon/appointments/service/AppointmentService.java
+/home/coder/project/workspace/appointment-service/src/main/java/com/hackathon/appointments/entity/Appointment.java
+/home/coder/project/workspace/appointment-service/src/main/java/com/hackathon/appointments/repository/AppointmentRepository.java
+/home/coder/project/workspace/appointment-service/src/main/java/com/hackathon/appointments/exception/GlobalExceptionHandler.java
+/home/coder/project/workspace/appointment-service/src/main/java/com/hackathon/appointments/model/Doctor.java
+/home/coder/project/workspace/appointment-service/src/main/java/com/hackathon/appointments/payload/ErrorResponse.java
+/home/coder/project/workspace/appointment-service/src/main/java/com/hackathon/appointments/exception/ResourceNotFoundException.java
+/home/coder/project/workspace/appointment-service/src/main/java/com/hackathon/appointments/payload/StatusMessages.java

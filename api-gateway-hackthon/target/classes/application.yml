@@ -1,0 +1,73 @@
+server:
+  port: 7001
+
+spring:
+  application:
+    name: HACKTHON-API-GATEWAY
+   
+  cloud:
+    gateway:
+      filter:
+        circuit-breaker:
+          enabled: true
+      routes:
+        - id: USER-MANAGEMENT
+          uri: lb://USER-MANAGEMENT
+          predicates:
+            - Path=/api/v1/management/**, /api/v1/actor/**
+            - Method=GET,POST,PUT,DELETE
+        
+        - id: BILLING-PAYMENT
+          uri: lb://BILLING-PAYMENT
+          predicates:
+          - Path=/api/v1/**
+          - Method=GET,POST,PUT,DELETE
+
+        - id: APPOINTMENT-SERVICE
+          uri: lb://APPOINTMENT-SERVICE
+          predicates:
+            - Path=/api/v1/appointment/**
+            - Method=GET,POST,PUT,DELETE
+
+        - id: MEDICAL-HISTORY-SERVICE
+          uri: lb://MEDICAL-HISTORY-SERVICE
+          predicates:
+            - Path=/api/v1/medical/**
+            - Method=GET,POST,PUT,DELETE
+
+        - id: NOTIFICATION-MANAGEMENT-SERVICE
+          uri: lb://NOTIFICATION-MANAGEMENT-SERVICE
+          predicates:
+            - Path=/api/v1/schedule/**
+            - Method=GET,POST,PUT,DELETE
+        
+        - id: PATIENT-PROFILE-SERVICE
+          uri: lb://NOTIFICATION-MANAGEMENT-SERVICE
+          predicates:
+            - Path=/api/v1/profile/**
+            - Method=GET,POST,PUT,DELETE
+
+
+  main:
+    web-application-type: reactive
+
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus
+  endpoint:
+    health:
+      show-details: always
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
